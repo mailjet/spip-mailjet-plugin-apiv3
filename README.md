@@ -1,4 +1,4 @@
-[API v1] Mailjet for SPIP
+[API v3] Mailjet for SPIP
 =====================
 
 Mailjet's Spip plugin provides complete control of Email settings with Spip.
