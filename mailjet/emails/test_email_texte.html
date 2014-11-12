@@ -1,0 +1,12 @@
+<:mailjet:corps_email_de_test:>
+--------------------------------
+
+<:mailjet:version_texte:>
+
+<BOUCLE_art(ARTICLES){texte==<img}{0,1}>
+		[(#TEXTE|textebrut)]
+</BOUCLE_art>
+	<BOUCLE_art2(ARTICLES){0,1}>
+			[(#TEXTE|textebrut)]
+	</BOUCLE_art2>
+<//B_art>

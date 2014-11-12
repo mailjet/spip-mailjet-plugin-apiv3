@@ -1,0 +1,25 @@
+<paquet
+	prefix="mailjet"
+	categorie="communication"
+	version="1.2.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/mailjet-32.png"
+	schema="1.1"
+	documentation="http://www.mailjet.com"
+>	
+	
+	<nom>Mailjet</nom>
+	<!-- Il distribue votre courrier -->
+	
+	<auteur>Mailjet SAS</auteur>
+	
+	<pipeline nom="mailjet_pre_envoi" action="" />
+	<pipeline nom="ieconfig_metas" inclure="mailjet_ieconfig_metas.php" />
+
+	<menu nom="configurer_mailjet" titre="mailjet:configuration_mailjet" parent="menu_configuration" icone="images/mailjet-16.png" />
+	<menu nom="mailjet_lists" titre="mailjet:mailjet" parent="menu_edition" icone="images/mailjet-16.png" />
+    <onglet nom="mailjet_lists_tab" titre="mailjet:mailjet_lists" parent="mailjet_tabs" action="mailjet_lists" icone="images/list-24.png" />
+    <onglet nom="mailjet_campaigns_tab" titre="mailjet:mailjet_campaigns" parent="mailjet_tabs" action="mailjet_campaigns" icone="images/campaigns-24.png" />
+    <onglet nom="mailjet_stats_tab" titre="mailjet:mailjet_stats" parent="mailjet_tabs" action="mailjet_stats" icone="images/stats-24.png" />
+</paquet>
