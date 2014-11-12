@@ -8,7 +8,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('MAILJET_HOST', 'in.mailjet.com');
+define('MAILJET_HOST', 'in-v3.mailjet.com');
 include_spip('inc/charsets');
 include_spip('inc/texte');
 include_spip('inc/filtres');
