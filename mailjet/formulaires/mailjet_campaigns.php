@@ -42,7 +42,7 @@ function mailjet_get_api_token()
     }
 }
 
-function formulaires_mailjet_campaigns_charger_dist($list_id)
+function formulaires_mailjet_campaigns_charger_dist()
 {
     $token = mailjet_get_api_token();
     if($token) {
