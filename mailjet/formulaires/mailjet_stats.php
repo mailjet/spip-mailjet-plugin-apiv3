@@ -48,7 +48,7 @@ function formulaires_mailjet_stats_charger_dist()
     $locale = mailjet_get_iframe_lang($GLOBALS['spip_lang']);
     if($token) {
         return array(
-            'iframe_src' => 'https://app.mailjet.com/stats?t='.$token.'&locale='.$locale,
+            'iframe_src' => 'https://www.mailjet.com/stats?t='.$token.'&locale='.$locale,
         );
     }
     return array();
