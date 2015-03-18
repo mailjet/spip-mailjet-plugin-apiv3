@@ -14,7 +14,7 @@ function mailjet_get_api_token()
         return $key_cache[$_SERVER['REMOTE_ADDR']]['token'];
     } else {
 
-        $api = new MailjetApi($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
+        $MailjetApi = new SPIP_Mailjet_Api($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
         $params = array(
             'allowed_access' => array('campaigns','contacts','stats','preferences'),
             'method' => 'POST',
@@ -27,10 +27,10 @@ function mailjet_get_api_token()
 
 
 
-        $response = $api->apiKeyAuthenticate($params);
+        $response = $MailjetApi->getToken($params);
 
-        if ($response->status == 'OK') {
-            $token = $response->token;
+        if ($response['status'] == 'OK') { 
+            $token = $response['token'];
             //TODO add token to meta mailjet_api_authenticate_cache
             $key_cache[$_SERVER['REMOTE_ADDR']]['timestamp'] = time();
             $key_cache[$_SERVER['REMOTE_ADDR']]['token'] = $token;

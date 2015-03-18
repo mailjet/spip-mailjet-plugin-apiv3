@@ -6,6 +6,8 @@
  *
  */
 
+include_spip('classes/mailjet-api-v1');
+include_spip('classes/mailjet-api-v3');
 include_spip('classes/mailjet-api');
 
 
