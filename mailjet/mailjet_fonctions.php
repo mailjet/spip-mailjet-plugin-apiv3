@@ -10,6 +10,12 @@ include_spip('classes/mailjet-api-v1');
 include_spip('classes/mailjet-api-v3');
 include_spip('classes/mailjet-api');
 
+function mailjet_get_iframe_lang($langCode){
+    $locales = array(
+        'fr' => 'fr_FR', 'en' => 'en_US', 'de' => 'de_DE', 'es' => 'es_ES'
+    );
+    return isset($locales[$langCode]) ? $locales[$langCode] : 'fr_FR';
+}
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
