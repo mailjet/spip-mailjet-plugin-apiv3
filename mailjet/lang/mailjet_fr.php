@@ -92,7 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailjet_smtp_sender' => 'Return-Path (optionnel)',
 	'mailjet_smtp_sender_descriptif' => 'Definir le Return-Path dans l\'email, utile pour recevoir les messages d\'erreur',
 	'mailjet_adresse_envoi_email_descriptif' => 'Définir l\'adresse d\'envoi pour tous vos emails. Doit être activé dans votre <a href="https://www.mailjet.com/account/sender">compte</a>',
-    'mailjet_api_auth_error' => 'Merci de vérifier que vous avez correctement saisi votre clé d\'API et votre clé secrète. Si vous obtenez toujours ce message d\'erreur après vérification, rendez-vous dans la section Account API keys (<a href="https://www.mailjet.com/account/api_keys">https://www.mailjet.com/account/api_keys</a>) pour générer un nouvelle clé secrète pour le plug-in. <a href="https://app.mailjet.com/signup?p=spip-3.0">Si vous n\'avez pas de compte Mailjet</a>, créez-en un.',
+    'mailjet_api_auth_error' => 'Merci de vérifier que vous avez correctement saisi votre clé d\'API et votre clé secrète. Si vous obtenez toujours ce message d\'erreur après vérification, rendez-vous dans la section Account API keys (<a href="https://www.mailjet.com/account/api_keys" target="_blank">https://www.mailjet.com/account/api_keys</a>) pour générer un nouvelle clé secrète pour le plug-in.',
+    'mailjet_api_create_account' => '<a href="https://app.mailjet.com/signup?p=spip-3.0" target="_blank">Si vous n\'avez pas de compte Mailjet</a>, créez-en un.',
 
 	// N
 	'note_test_configuration' => 'Un email de test va être envoyé.',

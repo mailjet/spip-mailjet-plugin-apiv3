@@ -79,6 +79,9 @@ function formulaires_configurer_mailjet_verifier_dist(){
 		$erreurs['mailjet_bcc'] = _T('form_email_non_valide');
 	}
 	
+	if(count($erreurs)>0){
+		$erreurs['message_erreur'] = _T('mailjet:erreur_generale');
+	}
     /*
      * Mailjet API keys validation
      */
@@ -87,10 +90,9 @@ function formulaires_configurer_mailjet_verifier_dist(){
         effacer_meta('mailjet_smtp_username');
 		effacer_meta('mailjet_smtp_password');
 		effacer_meta('mailjet_api_authenticate_cache');
-		$erreurs['mailjet_smtp_username'] = _T('mailjet:mailjet_api_auth_error');
-	}
-	if(count($erreurs)>0){
-		$erreurs['message_erreur'] = _T('mailjet:erreur_generale');
+        $erreurs['message_erreur'] = _T('mailjet:mailjet_api_auth_error');
+		$erreurs['mailjet_smtp_username'] = ' ';
+        $erreurs['mailjet_smtp_password'] = ' ';
 	}
 	return $erreurs;
 }

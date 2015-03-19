@@ -38,7 +38,7 @@ function mailjet_get_api_token()
             ecrire_meta('mailjet_api_authenticate_cache', serialize($key_cache));
             return $token;
         }
-        echo '<p class="error">'._T('mailjet:mailjet_api_auth_error').'</p>';
+        echo '<p class="error">'._T('mailjet:mailjet_api_auth_error').'<br /><br />'._T('mailjet:mailjet_api_create_account').'</p>';
         return false;
     }
 }
