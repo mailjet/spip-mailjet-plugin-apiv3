@@ -312,7 +312,7 @@
 		
         $response = $this->apiKeyAuthenticate($params);
      
-		return (array) $response; 
+		return (object) $response; 
 	}	
 
 	/**
@@ -784,7 +784,7 @@
 
         // Get and return the token
 		if(isset($response->Data) && count($response->Data) > 0) {
-            return array('status' => 'OK', 'token' => $response->Data[0]->Token);
+            return (object) array('status' => 'OK', 'token' => $response->Data[0]->Token);
         }
 		
 		return (object) array('status' => 'ERROR');
@@ -824,6 +824,7 @@
 			if(isset($response->Status) && $response->Status == 'ERROR')
 			{				
 				$this->clearContext();			
+                return false;
 			} 
 		} 	
 	}
@@ -851,6 +852,10 @@
     }
 	
 
+    public function getContext()
+    {
+        return isset($this->context) ? $this->context : falses;
+    }
     public function createLists($params)
 	{	
 		// Check if we have context, if no, return error

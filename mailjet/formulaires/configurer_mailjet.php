@@ -79,6 +79,16 @@ function formulaires_configurer_mailjet_verifier_dist(){
 		$erreurs['mailjet_bcc'] = _T('form_email_non_valide');
 	}
 	
+    /*
+     * Mailjet API keys validation
+     */
+    $MailjetApi = new SPIP_Mailjet_Api(_request('mailjet_smtp_username'), _request('mailjet_smtp_password'));
+    if($MailjetApi->getContext() == false) {
+        effacer_meta('mailjet_smtp_username');
+		effacer_meta('mailjet_smtp_password');
+		effacer_meta('mailjet_api_authenticate_cache');
+		$erreurs['mailjet_smtp_username'] = _T('mailjet:mailjet_api_auth_error');
+	}
 	if(count($erreurs)>0){
 		$erreurs['message_erreur'] = _T('mailjet:erreur_generale');
 	}

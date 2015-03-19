@@ -29,8 +29,8 @@ function mailjet_get_api_token()
 
         $response = $MailjetApi->getToken($params);
 
-        if ($response['status'] == 'OK') { 
-            $token = $response['token'];
+         if ($response->status == 'OK') {
+            $token = $response->token;
             //TODO add token to meta mailjet_api_authenticate_cache
             $key_cache[$_SERVER['REMOTE_ADDR']]['timestamp'] = time();
             $key_cache[$_SERVER['REMOTE_ADDR']]['token'] = $token;
@@ -38,6 +38,7 @@ function mailjet_get_api_token()
             ecrire_meta('mailjet_api_authenticate_cache', serialize($key_cache));
             return $token;
         }
+        echo '<p class="error">'._T('mailjet:mailjet_api_auth_error').'</p>';
         return false;
     }
 }
