@@ -16,9 +16,10 @@ function mailjet_get_api_token()
         return $key_cache[$_SERVER['REMOTE_ADDR']]['token'];
     } else {
 
-        $api = new MailjetApi($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
+        $MailjetApi = new SPIP_Mailjet_Api($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
+
         $params = array(
-            'allowed_access' => array('campaigns','stats'),
+            'allowed_access' => array('campaigns','contacts','stats','preferences'),
             'method' => 'POST',
             'apikey' => $GLOBALS['meta']['mailjet_smtp_username'], // Use any API Key from your Sub-accounts
             'default_page' => 'stats',
@@ -26,9 +27,9 @@ function mailjet_get_api_token()
             'type' => 'page',
         );
 
-        $response = $api->apiKeyAuthenticate($params);
+        $response = $MailjetApi->getToken($params);
 
-        if ($response->status == 'OK') {
+          if ($response->status == 'OK') {
             $token = $response->token;
             //TODO add token to meta mailjet_api_authenticate_cache
             $key_cache[$_SERVER['REMOTE_ADDR']]['timestamp'] = time();
@@ -37,16 +38,18 @@ function mailjet_get_api_token()
             ecrire_meta('mailjet_api_authenticate_cache', serialize($key_cache));
             return $token;
         }
+        echo '<p class="error">'._T('mailjet:mailjet_api_auth_error').'<br /><br />'._T('mailjet:mailjet_api_create_account').'</p>';
         return false;
     }
 }
 
-function formulaires_mailjet_stats_charger_dist($list_id)
+function formulaires_mailjet_stats_charger_dist()
 {
     $token = mailjet_get_api_token();
+    $locale = mailjet_get_iframe_lang($GLOBALS['spip_lang']);
     if($token) {
         return array(
-            'iframe_src' => 'https://www.mailjet.com/stats?t='.$token,
+            'iframe_src' => 'https://www.mailjet.com/stats?t='.$token.'&locale='.$locale,
         );
     }
     return array();

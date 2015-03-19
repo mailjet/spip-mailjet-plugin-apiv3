@@ -95,6 +95,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mailjet_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender\'s email.',
 	'mailjet_smtp_username' => 'Username:',
 	'mailjet_adresse_envoi_email_descriptif' => 'Define the sender\'s address for all your email. Must be activated in your <a href="https://www.mailjet.com/account/sender">account</a>',
+    'mailjet_api_auth_error' => 'Please verify that you have entered your API and secret key correctly. If this is the case and you have still this error message, please go to Account API keys (<a href="https://www.mailjet.com/account/api_keys" target="_blank">https://www.mailjet.com/account/api_keys</a>) to regenerate a new Secret Key for the plug-in.',
+    'mailjet_api_create_account' => '<a href="https://app.mailjet.com/signup?p=spip-3.0" target="_blank">Create your Mailjet account</a> if you don\'t have any.',
 
 	// N
 	'note_test_configuration' => 'A test email will be sent to the "sender".',

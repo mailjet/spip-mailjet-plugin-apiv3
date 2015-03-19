@@ -8,63 +8,62 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function mailjet_object_to_array($ob)
+function mailjet_get_api_token()
 {
-    return (array) $ob;
+    $key_cache = unserialize($GLOBALS['meta']['mailjet_api_authenticate_cache']);
+
+    if(isset($key_cache[$_SERVER['REMOTE_ADDR']]) && $key_cache[$_SERVER['REMOTE_ADDR']]['timestamp']  > time()-10) {
+        return $key_cache[$_SERVER['REMOTE_ADDR']]['token'];
+    } else {
+
+        $MailjetApi = new SPIP_Mailjet_Api($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
+
+        $params = array(
+            'allowed_access' => array('campaigns','contacts','stats','preferences'),
+            'method' => 'POST',
+            'apikey' => $GLOBALS['meta']['mailjet_smtp_username'], // Use any API Key from your Sub-accounts
+            'default_page' => 'contacts',
+            'lang' => $GLOBALS['spip_lang'],
+            'type' => 'page',
+        );
+
+        $response = $MailjetApi->getToken($params);
+
+        if ($response->status == 'OK') {
+            $token = $response->token;
+            //TODO add token to meta mailjet_api_authenticate_cache
+            $key_cache[$_SERVER['REMOTE_ADDR']]['timestamp'] = time();
+            $key_cache[$_SERVER['REMOTE_ADDR']]['token'] = $token;
+
+            ecrire_meta('mailjet_api_authenticate_cache', serialize($key_cache));
+            return $token;
+        }
+        echo '<p class="error">'._T('mailjet:mailjet_api_auth_error').'<br /><br />'._T('mailjet:mailjet_api_create_account').'</p>';
+        return false;
+    }
 }
 
-function formulaires_mailjet_lists_charger_dist(){
-
-    $api = new MailjetApi($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
-
-    $lists = $api->listsAll();
-
-	$valeurs = array(
-        'lists' => array_map('mailjet_object_to_array', $lists->lists),
-	);
-
-	return $valeurs;
+function formulaires_mailjet_lists_charger_dist()
+{
+    $token = mailjet_get_api_token();
+    $locale = mailjet_get_iframe_lang($GLOBALS['spip_lang']);
+    if($token) {
+        return array(
+            'iframe_src' => 'https://www.mailjet.com/contacts?t='.$token.'&locale='.$locale,
+        );
+    }
+    return array();
 }
 
 function formulaires_mailjet_lists_verifier_dist(){
-	$erreurs = array();
-
-	if(count($erreurs)>0){
-		$erreurs['message_erreur'] = _T('mailjet:erreur_generale');
-	}
-	return $erreurs;
+	return array();
 }
 
 function formulaires_mailjet_lists_traiter_dist(){
 
-	include_spip('inc/meta');
-
-    //TODO delete selected lists
-
-    $list_ids = _request('lists');
-    $api = new MailjetApi($GLOBALS['meta']['mailjet_smtp_username'], $GLOBALS['meta']['mailjet_smtp_password']);
-
-    $success = true;
-    foreach ($list_ids as $list_id) {
-        $params = array(
-            'method' => 'POST',
-            'id' => $list_id,
-        );
-        $response = $api->listsDelete($params);
-
-        $success = $success && ($response->status == 'OK');
-
-    }
-
-    if($success){
-        $res = array('message_ok'=>_T('mailjet:selected_lists_deleted'));
-    } else{
-        $res = array('message_erreur'=>_T('mailjet:error_selected_lists_not_deleted'));
-    }
-
-
-	
-	return $res;
+	return array();
 }
+
+
 
 ?>

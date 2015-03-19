@@ -1,72 +1,9 @@
-<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
-	<form method="post" action="#ENV{action}">
-        <div>
-            #ACTION_FORMULAIRE{#ENV{action}}
-            <fieldset>
-                <legend>
-                    <:mailjet:my_mailjet_lists:>
-                </legend>
-
-                <div class="liste-objets mailjet_lists">
-                    <table class='spip liste'>
-                        <thead>
-                        <tr class='first_row'>
-                            <th class='label' colspan="2"><:mailjet:mailjet_list_label:></th>
-                            <th class='subscribers'><:mailjet:mailjet_list_subscribers:></th>
-                            <th class='subscribers'><:mailjet:mailjet_list_created_at:></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <BOUCLE_for(DATA){source table,#ENV{lists}}>
-                            <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-                                <td class='checkbox'><input type="checkbox" name="lists[]" class="checkbox" value="[(#VALEUR|table_valeur{id})]" /></td>
-                                <td class='label'><a href="?exec=create_list&list_id=[(#VALEUR|table_valeur{id})]">[(#VALEUR|table_valeur{label})]</a></td>
-                                <td class='label'>[(#VALEUR|table_valeur{subscribers})]</td>
-                                <td class='label'><?php echo date('<:mailjet:mailjet_date_format:>', [(#VALEUR|table_valeur{created_at})]) ?></td>
-
-                            </tr>
-                            </BOUCLE_for>
-                        </tbody>
-                    </table>
-                </div>
-            </fieldset>
-            <p class="boutons">
-                <input type="submit" name="delete" class="submit" value="<:mailjet:delete_selected_lists:>">
-                <span><:mailjet:or:> <a href="?exec=create_list"><:mailjet:create_new_list:></a></span>
-            </p>
-
-        </div>
-    </form>
-</div>
-<script type="text/javascript">
-    jQuery(function(){
-
-	jQuery('input[name=mailjet_smtp_secure]').change(function(){
-			if (jQuery(this).attr('value')=='non'){
-				jQuery('#mailjet_smtp_port').find('option').hide().removeAttr('selected');
-				jQuery('#mailjet_smtp_port').find('option[value=25]').show().attr('selected',"selected");
-				jQuery('#mailjet_smtp_port').find('option[value=587]').show();
-            }else if(jQuery(this).attr('value')=='ssl'){
-                jQuery('#mailjet_smtp_port').find('option').hide().removeAttr('selected');
-                jQuery('#mailjet_smtp_port').find('option[value=465]').show().attr('selected',"selected");
-
-            }else if(jQuery(this).attr('value')=='tls'){
-                jQuery('#mailjet_smtp_port').find('option').hide().removeAttr('selected');
-                jQuery('#mailjet_smtp_port').find('option[value=587]').show().attr('selected',"selected");
-            }
-	});
-
-    jQuery('input[name=mailjet_adresse_envoi]').change(function(){
-			if (jQuery(this).attr('value')=='oui'){
-				jQuery('.editer_mailjet_adresse_envoi_perso').show('fast')
-            }else{
-                jQuery('.editer_mailjet_adresse_envoi_perso').hide('fast')
-            }
-	});
+ [<iframe src="(#ENV*{iframe_src})" id="mailjet_lists_iframe" width="1000" height="1200"></iframe>]
 
 
-})
-</script>
+
+
+
+
+
+
