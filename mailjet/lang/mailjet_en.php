@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'delete_list' => 'Delete list',
 	// E
 	'email_test_envoye' => 'The test email was successfully sent. If you do not receive it correctly, check the configuration of your server or contact a server administrator.',
-    'email required' => 'Please enter your eail address',
+    'email required' => 'Please enter your email address',
 	'erreur' => 'Error',
 	'erreur_dans_log' => ': check the log file for more details',
 	'erreur_generale' => 'There are one or more configuration errors. Please check the contents of the form.',
@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'subscribe_contacts' => 'Subscribe new contacts',
     'subscribe_form_legend' => 'Subscribe to %s',
     'subscribe' => 'Subscribe',
+    'sender_email_not_valid' => 'Please make sure that you are using the correct API key and secret key associated to your mailjet account (from email).',
 	// T
 	'tester' => 'Test',
 	'tester_la_configuration' => 'Test the config',

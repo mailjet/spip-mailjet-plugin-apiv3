@@ -102,7 +102,7 @@ function formulaires_configurer_mailjet_verifier_dist(){
             $email = _request('mailjet_adresse_envoi_email');
             $validEmail = $MailjetApi->validateSenderEmail(array('email' => $email));
             if (!$validEmail) {
-                $erreurs['mailjet_adresse_envoi_email'] = _T('form_email_non_valide');
+                $erreurs['mailjet_adresse_envoi_email'] = _T('mailjet:sender_email_not_valid');
 	}
         }
     }
