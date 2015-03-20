@@ -93,7 +93,19 @@ function formulaires_configurer_mailjet_verifier_dist(){
         $erreurs['message_erreur'] = _T('mailjet:mailjet_api_auth_error');
 		$erreurs['mailjet_smtp_username'] = ' ';
         $erreurs['mailjet_smtp_password'] = ' ';
+	} else {
+        /*
+         * Validates entered email address if is one of active sender addresses of current API account
+         * If "Use the site's settings" radio option is selected for "Sender's address configuration" this check is omitted
+         */
+        if (_request('mailjet_adresse_envoi') == 'oui') {
+            $email = _request('mailjet_adresse_envoi_email');
+            $validEmail = $MailjetApi->validateSenderEmail(array('email' => $email));
+            if (!$validEmail) {
+                $erreurs['mailjet_adresse_envoi_email'] = _T('form_email_non_valide');
 	}
+        }
+    }
 	return $erreurs;
 }
 
