@@ -99,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'subscribe_contacts' => 'Suscribir nuevos contactos',
 'subscribe_form_legend' => 'Suscribirse a %s',
 'subscribe' => 'Suscribirse',
+'sender_email_not_valid' => 'Compruebe que se trata de la clave API y contraseña asociadas a su cuenta de Mailjet (enviadas por correo electrónico).',
 // T
 'tester' => 'Prueba',
 'tester_la_configuration' => 'Probar la configuración',

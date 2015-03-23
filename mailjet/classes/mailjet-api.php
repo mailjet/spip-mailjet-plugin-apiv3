@@ -121,6 +121,29 @@
     
     
  	/**
+     * Validates if given email adres is among the allowed senders for current API account
+     * 
+     * @param type $params array('email' =>)
+     * @return boolean
+     */
+    public function validateSenderEmail($params)
+	{
+        if(!isset($params['email']) || !$this->validateEmail($params['email'])) {
+            return false;	
+        }
+		// Get the list
+		$response = $this->getSenders($params);
+		// Check if the list exists
+		 if ($response->Status != 'ERROR') {
+            $sendersInfo = $response;
+            $domainArr = explode('@', $params['email']);
+            if (in_array($params['email'], $sendersInfo['email']) || in_array($domainArr[1], $sendersInfo['domain'])) {
+                return true;
+            }
+		}		
+		return false;
+	}
+ 	/**
 	 * Get full list of senders
 	 * 
 	 * @param (array) $param = array('limit', ...) 
@@ -128,9 +151,6 @@
 	 */
  	public function getSenders($params)
 	{
-		// Set input parameters
-		$input = array();
-		if(isset($params['limit'])) $input['limit'] = $params['limit'];
 
 		// Get the list
 		$response = $this->userSenderList()->senders;
@@ -515,6 +535,29 @@
     
 
 	/**
+     * Validates if given email adres is among the allowed senders for current API account
+     * 
+     * @param type $params array('email' => )
+     * @return boolean
+     */
+    public function validateSenderEmail($params)
+	{
+        if(!isset($params['email']) || !$this->validateEmail($params['email'])) {
+            return false;	
+        }
+		// Get the list
+		$response = $this->getSenders($params);
+		// Check if the list exists
+		 if ($response->Status != 'ERROR') {
+            $sendersInfo = $response;
+            $domainArr = explode('@', $params['email']);
+            if (in_array($params['email'], $sendersInfo['email']) || in_array($domainArr[1], $sendersInfo['domain'])) {
+                return true;
+            }
+		}		
+		return false;
+	}
+	/**
 	 * Get full list of senders
 	 * 
 	 * @param (array) $param = array('limit', ...) 
@@ -522,12 +565,9 @@
 	 */
  	public function getSenders($params)
 	{
-		// Set input parameters
-		$input = array();
-		if(isset($params['limit'])) $input['limit'] = $params['limit'];
 
 		// Get the list
-		$response = $this->sender($input);
+		$response = $this->sender($params);
 
 		// Check if the list exists
 		if(isset($response->Data))
@@ -928,6 +968,14 @@
 			return (object) array('Status' => 'ERROR');
 			
 		return $this->context->deleteLists($params);
+	}
+    public function validateSenderEmail($params)
+	{	
+		// Check if we have context, if no, return error
+        if($this->context === FALSE) {
+            return false;
+        }
+		return $this->context->validateSenderEmail($params);
 	}
     
 	/**
